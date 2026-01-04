@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Manage Categories</h2>
+
+    <!-- ✅ Back to Dashboard button -->
+    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+        ← Back to Dashboard
+    </a>
+</div>
+
+<a href="{{ url_for('add_category') }}" class="btn btn-outline-primary mb-3">
+    + Add Category
+</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th style="width: 160px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for cat in categories %}
+        <tr>
+            <td>{{ cat.name }}</td>
+            <td>{{ cat.description }}</td>
+            <td>
+                <a href="{{ url_for('edit_category', id=cat.id) }}" class="btn btn-sm btn-warning">
+                    Edit
+                </a>
+                <a href="{{ url_for('delete_category', id=cat.id) }}" class="btn btn-sm btn-danger">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
